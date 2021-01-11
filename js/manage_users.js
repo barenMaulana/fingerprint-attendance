@@ -1,4 +1,4 @@
-
+// SQL_Error_select_Fingerprint
 $(document).ready(function () {
 
   // add fingerid

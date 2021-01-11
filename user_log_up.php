@@ -15,6 +15,8 @@ session_start();
       }
     }
 
+    $seldate = "";
+
     if ($_POST['select_date'] == 1) {
       $_SESSION['seldate'] = date("Y-m-d");
     } else if ($_POST['select_date'] == 0) {
