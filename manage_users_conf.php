@@ -1,4 +1,6 @@
 <?php
+// SQL_Error_select_Fingerprint
+// A new User has been added!
 //Connect to database
 require 'connectDB.php';
 
@@ -96,13 +98,13 @@ if (isset($_POST['Add'])) {
                         mysqli_stmt_execute($result);
                         $resultl = mysqli_stmt_get_result($result);
                         if (!$row = mysqli_fetch_assoc($resultl)) {
-                            $sql = "UPDATE users SET username=?, serialnumber=?, gender=?, email=?, parent_number=?, student_class=?, student_year=?, parent_name=?, student_number=?, parent_name=? user_date=CURDATE(), time_in=? WHERE fingerprint_select=1";
+                            $sql = "UPDATE users SET username=?, serialnumber=?, gender=?, email=?, parent_number=?, student_class=?, student_year=?, parent_name=?, student_number=?, user_date=CURDATE(), time_in=? WHERE fingerprint_select=1";
                             $result = mysqli_stmt_init($conn);
                             if (!mysqli_stmt_prepare($result, $sql)) {
                                 echo "SQL_Error_select_Fingerprint";
                                 exit();
                             } else {
-                                mysqli_stmt_bind_param($result, "sdsss", $Uname, $Number, $parent_number, $student_class, $student_year, $parent_name, $student_number, $parent_name, $Gender, $Email, $Timein);
+                                mysqli_stmt_bind_param($result, "sdsss", $Uname, $Number, $Gender, $Email, $parent_number, $student_class, $student_year, $parent_name, $student_number, $Timein);
                                 mysqli_stmt_execute($result);
 
                                 echo "A new User has been added!";
