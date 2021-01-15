@@ -29,6 +29,7 @@ if (isset($_POST['FingerID'])) {
                 $email = $row['email'];
                 $student_class = $row['student_class'];
                 $status = "hadir";
+
                 $sql = "SELECT * FROM users_logs WHERE fingerprint_id=? AND checkindate=? AND timeout=''";
                 $result = mysqli_stmt_init($conn);
                 if (!mysqli_stmt_prepare($result, $sql)) {
@@ -42,14 +43,14 @@ if (isset($_POST['FingerID'])) {
                     //Login
                     if (!$row = mysqli_fetch_assoc($resultl)) {
 
-                        $sql = "INSERT INTO users_logs (username, serialnumber, fingerprint_id, checkindate, timein, timeout, parent_number, student_number, email, student_class, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                        $sql = "INSERT INTO users_logs (username, serialnumber, fingerprint_id, checkindate, timein, timeout, parent_number, student_number, email, student_class, status) VALUES (?, ?, ?, ?, ?, ?, '$parent_number', '$student_number', '$email', '$student_class', '$status')";
                         $result = mysqli_stmt_init($conn);
                         if (!mysqli_stmt_prepare($result, $sql)) {
                             echo "SQL_Error_Select_login1";
                             exit();
                         } else {
                             $timeout = "0";
-                            mysqli_stmt_bind_param($result, "sdisss", $Uname, $Number, $fingerID, $d, $t, $timeout, $parent_number, $student_number, $email, $student_class, $status);
+                            mysqli_stmt_bind_param($result, "sdisss", $Uname, $Number, $fingerID, $d, $t, $timeout);
                             mysqli_stmt_execute($result);
 
                             echo "login" . $Uname;

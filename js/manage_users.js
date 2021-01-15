@@ -46,6 +46,7 @@ $(document).ready(function () {
     var timein = $('#timein').val();
     var gender = $(".gender:checked").val();
 
+
     $.ajax({
       url: 'manage_users_conf.php',
       type: 'POST',

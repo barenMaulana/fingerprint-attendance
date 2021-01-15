@@ -5,10 +5,10 @@
 	<title>Absensi | Biometric</title>
 	<link rel="shortcut icon" href="assets/logo-wb.png" type="image/x-icon">
 	<link rel="stylesheet" type="text/css" href="css/manageusers.css">
-	<script src="js/jquery-2.2.3.min.js"></script>
-	<script src="js/manage_users.js"></script>
 	<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha1256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous">
 	</script>
+	<script src="js/jquery-2.2.3.min.js"></script>
+	<script src="js/manage_users.js"></script>
 	<script>
 		$(window).on("load resize ", function() {
 			var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
