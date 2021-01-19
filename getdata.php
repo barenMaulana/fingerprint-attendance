@@ -41,6 +41,8 @@ if (isset($_POST['FingerID'])) {
                     $resultl = mysqli_stmt_get_result($result);
                     //*****************************************************
                     //Login
+                    $check = mysqli_query($conn, "SELECT * FROM users_logs WHERE checkindate='$d' AND fingerprint_id='$fingerID' AND timeout='00:00:00'");
+                    $isRow =  mysqli_num_rows($check);
                     if (!$row = mysqli_fetch_assoc($resultl)) {
 
                         $sql = "INSERT INTO users_logs (username, serialnumber, fingerprint_id, checkindate, timein, timeout, parent_number, student_number, email, student_class, status) VALUES (?, ?, ?, ?, ?, ?, '$parent_number', '$student_number', '$email', '$student_class', '$status')";
