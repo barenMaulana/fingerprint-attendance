@@ -1,6 +1,4 @@
 <?php
-// SQL_Error_select_Fingerprint
-// A new User has been added!
 //Connect to database
 require 'connectDB.php';
 
@@ -26,7 +24,6 @@ if (isset($_GET['select'])) {
                 exit();
             } else {
                 mysqli_stmt_execute($result);
-
                 $sql = "UPDATE users SET fingerprint_select=1 WHERE fingerprint_id=?";
                 $result = mysqli_stmt_init($conn);
                 if (!mysqli_stmt_prepare($result, $sql)) {
@@ -68,10 +65,12 @@ if (isset($_POST['Add'])) {
     $student_class = $_POST['student_class'];
     $parent_name = $_POST['parent_name'];
     $student_year = $_POST['student_year'];
+    
 
     //optional
     $Timein = $_POST['timein'];
     $Gender = $_POST['gender'];
+    var_dump("waktu ".$Timein);
 
     //check if there any selected user
     $sql = "SELECT username FROM users WHERE fingerprint_select=1";
@@ -98,13 +97,13 @@ if (isset($_POST['Add'])) {
                         mysqli_stmt_execute($result);
                         $resultl = mysqli_stmt_get_result($result);
                         if (!$row = mysqli_fetch_assoc($resultl)) {
-                            $sql = "UPDATE users SET username=?, serialnumber=?, gender=?, email=?, parent_number=?, student_class=?, student_year=?, parent_name=?, student_number=?, user_date=CURDATE(), time_in=? WHERE fingerprint_select=1";
+                            $sql = "UPDATE users SET username=?, serialnumber=?, gender=?, email=?, parent_number='$parent_number', student_class='$student_class', student_year='$student_year', parent_name='$parent_name', student_number='$student_number', user_date=CURDATE(), time_in=? WHERE fingerprint_select=1";
                             $result = mysqli_stmt_init($conn);
                             if (!mysqli_stmt_prepare($result, $sql)) {
                                 echo "SQL_Error_select_Fingerprint";
                                 exit();
                             } else {
-                                mysqli_stmt_bind_param($result, "sdsss", $Uname, $Number, $Gender, $Email, $parent_number, $student_class, $student_year, $parent_name, $student_number, $Timein);
+                                mysqli_stmt_bind_param($result, "sdsss",$Uname, $Number,$Gender, $Email, $Timein);
                                 mysqli_stmt_execute($result);
 
                                 echo "A new User has been added!";
@@ -140,7 +139,7 @@ if (isset($_POST['Add_fingerID'])) {
     $Email = "Email";
 
     //optional
-    $Timein = "00:00:00";
+    $Timein = "07:00:00";
     $Gender = "Gender";
 
     if ($fingerid == 0) {
@@ -198,7 +197,7 @@ if (isset($_POST['Add_fingerID'])) {
                 }
             }
         } else {
-            echo "The Fingerprint ID must be between 1 & 127";
+            echo "The Fingerprint ID must be between 1 & 1000";
             exit();
         }
     }

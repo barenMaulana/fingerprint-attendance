@@ -18,6 +18,7 @@ session_start();
 
     // var_dump($_SESSION['student_class']);
     // var_dump($_SESSION['tanggal']);
+    $_POST['select_date'] = 0;
 
     if ($_POST['select_date'] == 1) {
       $_SESSION['tanggal'] = date("Y-m-d");

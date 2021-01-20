@@ -1,4 +1,4 @@
-<?php
+<?php            
 require 'connectDB.php';
 date_default_timezone_set('Asia/Jakarta');
 $d = date("Y-m-d");
@@ -55,14 +55,14 @@ if (strpos($message, "/start") === 0) {
         $query = mysqli_query($conn, "SELECT * FROM users_logs WHERE checkindate='$d' AND student_class='$kelas'");
         $isRow =  mysqli_num_rows($query);
         $result = [];
-        if ($isRow != 0) {
+    if ($isRow != 0) {
             while ($row = mysqli_fetch_assoc($query)) {
                 $result[] = $row;
             }
             $informasi = "NAMA       KELAS       MASUK       PULANG  ";
             $report = "";
-            for ($i = 0; $i < count($result); $i++) {
-                $report .= $result[$i]["username"] . "         " . $result[$i]["student_class"] . "            " . $result[$i]["timein"] . "         " . $result[$i]["timeout"] . "          ";
+            for($i = 0; $i < count($result);$i++){
+                $report .= $result[$i]["username"] ."         ".$result[$i]["student_class"]."            ".$result[$i]["timein"]."         ".$result[$i]["timeout"]."          ";
             }
             $informasi .= $report;
             file_get_contents($apiURL . "/sendmessage?chat_id=" . $chatID . "&text=" . $informasi);

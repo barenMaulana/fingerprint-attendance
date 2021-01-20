@@ -4,11 +4,12 @@
 <head>
 	<title>Absensi | Biometric</title>
 	<link rel="shortcut icon" href="assets/logo-wb.png" type="image/x-icon">
-	<link rel="stylesheet" type="text/css" href="css/manageusers.css">
-	<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha1256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous">
+		<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha1256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous">
 	</script>
+	<link rel="stylesheet" type="text/css" href="css/manageusers.css">
 	<script src="js/jquery-2.2.3.min.js"></script>
 	<script src="js/manage_users.js"></script>
+
 	<script>
 		$(window).on("load resize ", function() {
 			var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
@@ -56,8 +57,8 @@
 					<input type="text" name="number" id="number" placeholder="Serial Number...">
 					<input type="email" name="email" id="email" placeholder="User Email...">
 					<input type="number" name="parent_number" id="parent_number" placeholder="Nomor orang tua...">
-					<input type="number" name="student_number" id="student_number" placeholder="Nomor Siswa...">
 					<input type="text" name="parent_name" id="parent_name" placeholder="Nama Orang tua">
+					<input type="number" name="student_number" id="student_number" placeholder="Nomor Siswa...">
 					<select name="student_class" id="student_class">
 						<option selected>Kelas</option>
 						<option value="7A">7A</option>

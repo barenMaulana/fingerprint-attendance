@@ -5,7 +5,7 @@
   <title>Absensi | Biometric</title>
   <link rel="shortcut icon" href="assets/logo-wb.png" type="image/x-icon">
   <link rel="stylesheet" type="text/css" href="css/Users.css">
-  <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha1256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha1256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous">
   </script>
   <script>
     $(window).on("load resize ", function() {

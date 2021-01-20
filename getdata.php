@@ -1,6 +1,8 @@
 <?php
 //Connect to database
+session_start();
 require 'connectDB.php';
+
 date_default_timezone_set('Asia/Jakarta');
 $d = date("Y-m-d");
 $t = date("H:i:sa");
@@ -8,7 +10,7 @@ $t = date("H:i:sa");
 if (isset($_POST['FingerID'])) {
 
     $fingerID = $_POST['FingerID'];
-
+    
     $sql = "SELECT * FROM users WHERE fingerprint_id=?";
     $result = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($result, $sql)) {
@@ -29,7 +31,7 @@ if (isset($_POST['FingerID'])) {
                 $email = $row['email'];
                 $student_class = $row['student_class'];
                 $status = "hadir";
-
+                
                 $sql = "SELECT * FROM users_logs WHERE fingerprint_id=? AND checkindate=? AND timeout=''";
                 $result = mysqli_stmt_init($conn);
                 if (!mysqli_stmt_prepare($result, $sql)) {
@@ -41,10 +43,10 @@ if (isset($_POST['FingerID'])) {
                     $resultl = mysqli_stmt_get_result($result);
                     //*****************************************************
                     //Login
-                    $check = mysqli_query($conn, "SELECT * FROM users_logs WHERE checkindate='$d' AND fingerprint_id='$fingerID' AND timeout='00:00:00'");
+                
+                    $check = mysqli_query($conn,"SELECT * FROM users_logs WHERE checkindate='$d' AND fingerprint_id='$fingerID' AND timeout='00:00:00'");
                     $isRow =  mysqli_num_rows($check);
-                    if (!$row = mysqli_fetch_assoc($resultl)) {
-
+                    if ($isRow == 0) {
                         $sql = "INSERT INTO users_logs (username, serialnumber, fingerprint_id, checkindate, timein, timeout, parent_number, student_number, email, student_class, status) VALUES (?, ?, ?, ?, ?, ?, '$parent_number', '$student_number', '$email', '$student_class', '$status')";
                         $result = mysqli_stmt_init($conn);
                         if (!mysqli_stmt_prepare($result, $sql)) {
@@ -62,7 +64,7 @@ if (isset($_POST['FingerID'])) {
                     //*****************************************************
                     //Logout
                     else {
-                        $sql = "UPDATE users_logs SET timeout=? WHERE checkindate=? AND fingerprint_id=? AND timeout='0' AND status='pulang'";
+                        $sql = "UPDATE users_logs SET timeout=? WHERE checkindate=? AND fingerprint_id=? AND timeout='00:00:00' AND status='hadir'";
                         $result = mysqli_stmt_init($conn);
                         if (!mysqli_stmt_prepare($result, $sql)) {
                             echo "SQL_Error_insert_logout1";
@@ -70,7 +72,6 @@ if (isset($_POST['FingerID'])) {
                         } else {
                             mysqli_stmt_bind_param($result, "ssi", $t, $d, $fingerID);
                             mysqli_stmt_execute($result);
-
                             echo "logout" . $Uname;
                             exit();
                         }
@@ -153,13 +154,13 @@ if (isset($_POST['FingerID'])) {
                 exit();
             } else {
                 mysqli_stmt_execute($result);
-                $sql = "INSERT INTO users ( username, serialnumber, gender, email, parent_number, student_number, parent_name, status, student_class, student_year, fingerprint_id, fingerprint_select, user_date, time_in, add_fingerid) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, CURDATE(), ?, 0)";
+                $sql = "INSERT INTO users (username, serialnumber, gender, email, parent_number, student_number, parent_name, status, student_class, student_year, fingerprint_id, fingerprint_select, user_date, time_in, add_fingerid) VALUES (?, ?, ?, ?, '$parent_number', '$student_number', '$parent_name', '$status', '$student_class', '$student_year', ?, 1, CURDATE(), ?, 0)";
                 $result = mysqli_stmt_init($conn);
                 if (!mysqli_stmt_prepare($result, $sql)) {
                     echo "SQL_Error_Select_add";
                     exit();
                 } else {
-                    mysqli_stmt_bind_param($result, "sdssis", $Uname, $Number, $Gender, $Email, $parent_number, $student_number, $parent_name, $status, $student_class, $student_year, $fingerID, $Timein);
+                    mysqli_stmt_bind_param($result, "sdssis", $Uname, $Number, $Gender, $Email, $fingerID, $Timein);
                     mysqli_stmt_execute($result);
 
                     echo "succesful1";

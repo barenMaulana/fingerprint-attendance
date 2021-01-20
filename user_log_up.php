@@ -14,8 +14,9 @@ session_start();
         $_SESSION['seldate'] = date("Y-m-d");
       }
     }
-
+    
     $seldate = "";
+    
     $_POST['select_date'] = 0;
 
     if ($_POST['select_date'] == 1) {
@@ -44,7 +45,6 @@ session_start();
               <TD><?php echo $row['serialnumber']; ?></TD>
               <TD><?php echo $row['fingerprint_id']; ?></TD>
               <TD><?php echo $row['parent_number']; ?></TD>
-              <TD><?php echo $row['student_number']; ?></TD>
               <TD><?php echo $row['checkindate']; ?></TD>
               <TD><?php echo $row['timein']; ?></TD>
               <TD><?php echo $row['timeout']; ?></TD>
